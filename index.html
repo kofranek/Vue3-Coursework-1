@@ -30,10 +30,16 @@
         </li>
       </ul>
       <div>
-        <button v-if="activeIndex>0" class="btn" @click="prev" ref="firstButton">Назад</button>
-        <button v-else disabled class="btn disabled" @click="prev">Назад</button>
-        <button v-if="!lastStep" class="btn primary" @click="nextOfFinish">Вперед</button>
-        <button v-else class="btn primary" @click="nextOfFinish">закончить</button>
+        <button v-if="activeIndex>0" class="btn" @click="prev">{{firstButtonText}}</button>
+        <button v-else disabled class="btn disabled" @click="prev">{{firstButtonText}}</button>
+
+
+
+        <button v-if="!lastStep" class="btn primary" @click="nextOrFinish">Вперед</button>
+        <button v-else-if="!end" class="btn primary" @click="nextOrFinish">Закончить</button>
+
+
+
 
       </div>
     </div>
