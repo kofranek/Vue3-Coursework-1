@@ -1,8 +1,10 @@
 // вы можете как угодно изменять программу и код
 // добавлять любые переменные и модели
 // ваша задача реализовать так, как показано на видео, чтобы оно работало
-
-
+//********************
+//Jiri Kofranek
+//email: kofranek@gmail.com
+//********************
 
 const App = {
   data() {
@@ -26,17 +28,18 @@ const App = {
       if(this.end){
         this.reset()
       }
-      else if(this.activeIndex>0){ //it is the same as if(this.activeIndex>0)
+      else if(this.activeIndex>0){
         this.activeIndex--
       }
     },
     reset() {
       // начать заново
       this.end=false
+      this.activeIndex=0
       this.firstButtonText='Назад'
 
     },
-    nextOrFinish(event) {
+    nextOrFinish() {
       // кнопка вперед или закончить
       if (!this.lastStep){
         this.activeIndex++
