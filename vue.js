@@ -69,7 +69,42 @@ const App = {
     lastStep(){
       return this.activeIndex===this.steps.length-1
     }
-  }
+  },
+  template:`
+  <div class="container">
+    <div class="card">
+      <h1>План по изучению Vue.js</h1>
+  
+      <div class="steps">
+        <div class="steps-content">
+          {{steps[stepSelected].text}}
+        </div>
+        <ul class="steps-list">
+          <li
+              :class="{
+                  'steps-item':index>activeIndex,
+                  'steps-item done':index<activeIndex,
+                  'steps-item active':index===activeIndex,
+                }"
+              @click="setActive(index)"
+              v-for="(item,index) in steps"
+          >
+            <span>{{index + 1}}</span>{{steps[index].title}}
+          </li>
+        </ul>
+        <div>
+          <button v-if="activeIndex>0" class="btn" @click="prev">{{firstButtonText}}</button>
+          <button v-else disabled class="btn disabled" @click="prev">{{firstButtonText}}</button>
+  
+          <button v-if="!lastStep" class="btn primary" @click="nextOrFinish">Вперед</button>
+          <button v-else-if="!end" class="btn primary" @click="nextOrFinish">Закончить</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  `
 }
 
 Vue.createApp(App).mount('#app')
