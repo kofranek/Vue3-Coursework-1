@@ -2,6 +2,8 @@
 // добавлять любые переменные и модели
 // ваша задача реализовать так, как показано на видео, чтобы оно работало
 
+
+
 const App = {
   data() {
     return {
@@ -12,28 +14,54 @@ const App = {
         {title: 'Роутер', text: 'В данном блоке вы узнаете все о том, как работает мультиязычность во Vue. Мы создадим миниклон Gmail в данном блоке, где вы на практике увидите как работать с динамическим роутером.'},
         {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
         {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
-      ]
+      ],
     }
   },
   methods: {
     prev() {
       // когда нажимаем кнопку назад
+      if(this.activeIndex){ //it is the same as if(this.activeIndex>0)
+        this.activeIndex--
+      }
     },
     reset() {
       // начать заново
     },
-    nextOfFinish() {
+    nextOfFinish(event) {
       // кнопка вперед или закончить
+      // if(this.activeIndex<this.steps.length-1){
+      //   this.activeIndex++
+      // }
+      if (!this.lastStep){
+        this.activeIndex++
+      }
+      else{
+        console.log('reset')
+        event.target.visible=false
+      }
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг
+      this.activeIndex=idx
     }
   },
   computed: {
     // тут стоит определить несколько свойств:
     // 1. текущий выбранный шаг
+    stepSelected(){
+      console.log('stepSelected',this.activeIndex)
+      return this.activeIndex
+    },
     // 2. выключена ли кнопка назад
+    firstButtonDisabled(){
+
+    },
     // 3. находимся ли мы на последнем шаге
+    lastStep(){
+      console.log('lastStep=',this.activeIndex===this.steps.length-1)
+      console.log('firstButtonDisabled=')
+      return this.activeIndex===this.steps.length-1
+    }
   }
 }
 
